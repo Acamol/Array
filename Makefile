@@ -8,7 +8,10 @@ OBJS = $(SRCS:.c=.o)
 DEPS = $(OBJS:.o=.d)
 
 INCLUDES = -I$(HEADS_DIR)/
-CFLAGS = -std=c99 -Wall -pedantic-errors $(INCLUDES) -MMD 
+CFLAGS = -std=c99 -Wall -pedantic-errors $(INCLUDES) -MMD
+ifeq ($(DEBUG), 1)
+	CFLAGS += -g3
+endif
 
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
